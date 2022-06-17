@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Directory</title>
+  </head>
+
+  <body>
+    <!-- LS Version >
+    <ul>
+      <% @files.each do |file| %>
+        <li>
+          <a href="<%= file %>"><%= file %></a>
+        </li>
+      <% end %>
+    </ul>
+
+    <p>
+      <% if params[:sort] == "desc" %>
+        <a href="/">Sort ascending</a>
+      <% else %>
+        <a href="/?sort=desc">Sort descending</a>
+      <% end %>
+    </p>
+    -->
+
+    <ul>
+      <% @files.each do |file| %>
+        <a href="<%= file %>">
+          <li><%= file %></li>
+        </a>
+      <% end %>
+    </ul>
+
+    <p>
+      <% if params['sort'] == 'desc' %>
+        <a href="/">Sort ascending</a>
+      <% else %>
+        <a href="/?sort=desc">Sort descending</a>
+      <% end %>
+    </p>
+  </body>
+</html>

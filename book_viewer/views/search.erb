@@ -1,0 +1,49 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>"/>
+  <button type="submit">Search</button>
+</form>
+
+<% if params[:query] %>
+  <% if @results.empty? %>
+    <p>Sorry, no matches were found.</p>
+  <% else %>
+    <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
+
+    <ul>
+      <% @results.each do |chapter| %>
+        <li>
+          <h3><%= chapter.first[:name] %></h3>
+
+          <ul>
+            <% chapter.each do |chapter_result| %>
+              <li>
+                <a href="/chapters/<%= chapter_result[:number] %>#<%= chapter_result[:paragraph_id] %>">
+                  <% window_length = params[:query].length %>
+                  <% match = chapter_result[:paragraph] %>
+
+                  <% start = 0 %>
+                  <% while start <= match.length %><!--
+                    --><% window = match.slice(start, window_length) %><!--
+
+                    --><% if window == params[:query] %><!--
+                      --><strong><%= window %></strong><!--
+                      --><% start += window_length %><!--
+
+                      --><% next %><!--
+                    --><% else %><!--
+                      --><%= match[start] %><!--
+                    --><% end %><!--
+
+                    --><% start += 1 %><!--
+                  --><% end %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
